@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.wheel
+
+# Virtual environments
+.venv/
+venv/
+env/
+us_quant_env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Data files (too large for git)
+data/
+*.csv
+*.parquet
+*.h5
+*.hdf5
+
+# Qlib cache
+.qlib/
+
+# Logs
+logs/
+*.log
+
+# Results (keep git tracking, ignore actual data)
+results/backtest/*.json
+results/backtest/*.csv
+results/signals/*.json
+results/signals/*.csv
+results/factors/*.pkl
+results/factors/*.parquet
+!results/backtest/.gitkeep
+!results/signals/.gitkeep
+!results/factors/.gitkeep
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker (if used later)
+docker-compose.override.yml
+
+# Node (if used for docs)
+node_modules/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
