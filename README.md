@@ -51,7 +51,8 @@
 | YFinance | 1.3.0 |
 | Pandas | 2.3.3 |
 | NumPy | 1.26.4 |
-| protobuf | 4.25.9 |
+| protobuf | 5.29.6 |
+| cvxpy | 1.6.7 |
 
 ## 快速开始
 

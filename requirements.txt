@@ -1,0 +1,25 @@
+# US_AI_Quant 核心依赖
+# 使用 pip install -r requirements.txt 安装
+
+# 量化框架
+pyqlib==0.9.7
+
+# 券商API
+futu-api==10.4.6408
+
+# 机器学习
+torch==2.2.2
+lightgbm==4.6.0
+xgboost==3.2.0
+
+# 数据处理
+pandas==2.3.3
+numpy==1.26.4
+scipy==1.17.1
+yfinance==1.3.0
+
+# 序列化（futu-api + opentelemetry 兼容）
+protobuf>=5.0,<6.0
+
+# 优化器（Qlib enhanced indexing, 需兼容 numpy<2.0）
+cvxpy==1.6.7

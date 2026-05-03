@@ -3,6 +3,9 @@ FutuBroker 单元测试
 
 注意：这些测试需要OpenD网关运行。
 如果OpenD未运行，测试会跳过（skip）。
+
+集成测试通过环境变量配置加密：
+  FUTU_ENCRYPT=1 FUTU_RSA_FILE=/path/to/key pytest tests/
 """
 
 import pytest
@@ -13,21 +16,37 @@ from src.execution.futu_broker import FutuBroker
 from futu import TrdEnv
 
 
-# 检查OpenD是否可用
+# 从环境变量读取加密配置
+FUTU_ENCRYPT = os.environ.get('FUTU_ENCRYPT', '0') == '1'
+FUTU_RSA_FILE = os.environ.get('FUTU_RSA_FILE', '')
+
+
+# 检查OpenD是否可用（通过实际尝试连接，而非仅检查端口）
 def is_opend_available():
     """检查OpenD网关是否可用"""
     try:
-        import socket
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(2)
-        result = sock.connect_ex(('127.0.0.1', 11111))
-        sock.close()
-        return result == 0
+        from futu import SysConfig, OpenQuoteContext
+        SysConfig.enable_proto_encrypt(FUTU_ENCRYPT)
+        if FUTU_ENCRYPT and FUTU_RSA_FILE:
+            SysConfig.set_init_rsa_file(FUTU_RSA_FILE)
+        ctx = OpenQuoteContext(host='127.0.0.1', port=11111)
+        ret, _ = ctx.get_market_snapshot(['US.AAPL'])
+        ctx.close()
+        return ret == 0
     except:
         return False
 
 
 OPEND_AVAILABLE = is_opend_available()
+
+
+def _broker_kwargs():
+    """获取集成测试用的FutuBroker参数"""
+    kwargs = {'env': 'simulate'}
+    if FUTU_ENCRYPT:
+        kwargs['enable_encrypt'] = True
+        kwargs['rsa_file'] = FUTU_RSA_FILE
+    return kwargs
 
 
 @pytest.mark.skipif(not OPEND_AVAILABLE, reason="OpenD网关未运行")
@@ -36,14 +55,14 @@ class TestFutuBrokerIntegration:
     
     def test_init_simulate_env(self):
         """测试初始化模拟环境"""
-        broker = FutuBroker(env='simulate')
+        broker = FutuBroker(**_broker_kwargs())
         assert broker.env == 'simulate'
         assert broker._trd_env == TrdEnv.SIMULATE
         broker.close()
     
     def test_get_realtime_quote(self):
         """测试获取实时报价"""
-        broker = FutuBroker(env='simulate')
+        broker = FutuBroker(**_broker_kwargs())
         try:
             data = broker.get_realtime_quote(['US.AAPL'])
             assert data is not None
@@ -52,7 +71,7 @@ class TestFutuBrokerIntegration:
     
     def test_get_kline(self):
         """测试获取K线数据"""
-        broker = FutuBroker(env='simulate')
+        broker = FutuBroker(**_broker_kwargs())
         try:
             data = broker.get_kline('US.AAPL', ktype='DAY', count=10)
             assert data is not None
@@ -62,7 +81,7 @@ class TestFutuBrokerIntegration:
     
     def test_context_manager(self):
         """测试上下文管理器"""
-        with FutuBroker(env='simulate') as broker:
+        with FutuBroker(**_broker_kwargs()) as broker:
             assert broker is not None
             assert broker.env == 'simulate'
 
