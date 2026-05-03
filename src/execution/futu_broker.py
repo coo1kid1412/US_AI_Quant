@@ -283,10 +283,14 @@ class FutuBroker:
         Returns:
             订单ID，失败返回None
         """
-        # 安全检查
+        # 安全检查 - 严禁实盘交易
         if self.env == 'real':
-            logger.warning(f"⚠️  真实环境下单: {side} {qty} {symbol} @ {price}")
-            # 真实环境需要二次确认（可通过环境变量或配置文件控制）
+            raise RuntimeError(
+                "🔴 安全禁令：严禁实盘交易！\n"
+                "在pipeline完全跑通且用户明确书面确认之前，\n"
+                "禁止使用实盘环境进行任何交易操作。\n"
+                "请使用 env='simulate' 进行模拟交易测试。"
+            )
         
         trd_side = TrdSide.BUY if side == 'BUY' else TrdSide.SELL
         
