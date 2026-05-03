@@ -11,6 +11,7 @@ FutuBroker 使用示例
 """
 
 import logging
+from futu import SysConfig
 from src.execution.futu_broker import FutuBroker
 
 # 配置日志

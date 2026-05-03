@@ -10,6 +10,7 @@ import os
 from unittest.mock import Mock, patch
 
 from src.execution.futu_broker import FutuBroker
+from futu import TrdEnv
 
 
 # 检查OpenD是否可用
@@ -37,7 +38,7 @@ class TestFutuBrokerIntegration:
         """测试初始化模拟环境"""
         broker = FutuBroker(env='simulate')
         assert broker.env == 'simulate'
-        assert broker._trd_env.value == 'SIMULATE'
+        assert broker._trd_env == TrdEnv.SIMULATE
         broker.close()
     
     def test_get_realtime_quote(self):
@@ -73,33 +74,36 @@ class TestFutuBrokerUnit:
         """测试无效环境参数"""
         with patch('src.execution.futu_broker.OpenQuoteContext'):
             with patch('src.execution.futu_broker.OpenSecTradeContext'):
-                with pytest.raises(ValueError, match="env必须是"):
-                    FutuBroker(env='invalid')
+                with patch('src.execution.futu_broker.SysConfig'):
+                    with pytest.raises(ValueError, match="env必须是"):
+                        FutuBroker(env='invalid')
     
     def test_invalid_ktype_raises_error(self):
         """测试无效K线类型"""
         with patch('src.execution.futu_broker.OpenQuoteContext') as mock_quote:
             with patch('src.execution.futu_broker.OpenSecTradeContext'):
-                mock_quote.return_value = Mock()
-                broker = FutuBroker(env='simulate')
-                
-                with pytest.raises(ValueError, match="不支持的K线类型"):
-                    broker.get_kline('US.AAPL', ktype='INVALID')
-                
-                broker.close()
+                with patch('src.execution.futu_broker.SysConfig'):
+                    mock_quote.return_value = Mock()
+                    broker = FutuBroker(env='simulate')
+                    
+                    with pytest.raises(ValueError, match="不支持的K线类型"):
+                        broker.get_kline('US.AAPL', ktype='INVALID')
+                    
+                    broker.close()
     
     def test_invalid_order_type_raises_error(self):
         """测试无效订单类型"""
         with patch('src.execution.futu_broker.OpenQuoteContext') as mock_quote:
             with patch('src.execution.futu_broker.OpenSecTradeContext') as mock_trade:
-                mock_quote.return_value = Mock()
-                mock_trade.return_value = Mock()
-                broker = FutuBroker(env='simulate')
-                
-                with pytest.raises(ValueError, match="不支持的订单类型"):
-                    broker.place_order('US.AAPL', 'BUY', 10, order_type='INVALID')
-                
-                broker.close()
+                with patch('src.execution.futu_broker.SysConfig'):
+                    mock_quote.return_value = Mock()
+                    mock_trade.return_value = Mock()
+                    broker = FutuBroker(env='simulate')
+                    
+                    with pytest.raises(ValueError, match="不支持的订单类型"):
+                        broker.place_order('US.AAPL', 'BUY', 10, order_type='INVALID')
+                    
+                    broker.close()
     
     def test_buy_side_mapping(self):
         """测试买入方向映射"""
@@ -113,18 +117,19 @@ class TestFutuBrokerUnit:
         """测试默认订阅"""
         with patch('src.execution.futu_broker.OpenQuoteContext') as mock_quote:
             with patch('src.execution.futu_broker.OpenSecTradeContext'):
-                import futu
-                mock_quote.return_value = Mock()
-                mock_quote.return_value.subscribe.return_value = (futu.RET_OK, None)
-                mock_quote.return_value.unsubscribe.return_value = (futu.RET_OK, None)
-                
-                broker = FutuBroker(env='simulate')
-                result = broker.subscribe(['US.AAPL'])
-                
-                assert result == True
-                assert 'US.AAPL' in broker._subscribed_symbols
-                
-                broker.close()
+                with patch('src.execution.futu_broker.SysConfig'):
+                    import futu
+                    mock_quote.return_value = Mock()
+                    mock_quote.return_value.subscribe.return_value = (futu.RET_OK, None)
+                    mock_quote.return_value.unsubscribe.return_value = (futu.RET_OK, None)
+                    
+                    broker = FutuBroker(env='simulate')
+                    result = broker.subscribe(['US.AAPL'])
+                    
+                    assert result == True
+                    assert 'US.AAPL' in broker._subscribed_symbols
+                    
+                    broker.close()
 
 
 if __name__ == '__main__':

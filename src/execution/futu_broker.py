@@ -15,6 +15,7 @@ import futu
 from futu import (
     OpenQuoteContext,
     OpenSecTradeContext,
+    SysConfig,
     SubType,
     KLType,
     OrderType,
@@ -47,6 +48,8 @@ class FutuBroker:
         host: str = '127.0.0.1',
         port: int = 11111,
         unlock_password: Optional[str] = None,
+        enable_encrypt: bool = False,
+        rsa_file: Optional[str] = None,
     ):
         """
         初始化FutuBroker
@@ -56,6 +59,8 @@ class FutuBroker:
             host: OpenD网关地址，默认127.0.0.1
             port: OpenD网关端口，默认11111
             unlock_password: 交易解锁密码（可选）
+            enable_encrypt: 是否启用协议加密，默认False（需OpenD端同步配置）
+            rsa_file: RSA私钥文件路径（仅enable_encrypt=True时需要）
             
         Raises:
             ValueError: env参数不合法
@@ -69,13 +74,23 @@ class FutuBroker:
         self.port = port
         self._trd_env = TrdEnv.SIMULATE if env == 'simulate' else TrdEnv.REAL
         
+        # 配置协议加密（必须在创建连接之前设置）
+        # 注意：Python端和OpenD端的加密设置必须一致
+        # 如果OpenD CLI的"加密私钥"字段为空，则此处必须为False
+        SysConfig.enable_proto_encrypt(enable_encrypt)
+        if enable_encrypt and rsa_file:
+            SysConfig.set_init_rsa_file(rsa_file)
+        logger.info(f"协议加密: {'启用' if enable_encrypt else '禁用'}")
+        
         # 初始化行情上下文
         logger.info(f"初始化行情上下文: {host}:{port}")
         self.quote_ctx = OpenQuoteContext(host=host, port=port)
         
         # 初始化交易上下文
         logger.info(f"初始化交易上下文: {host}:{port}, 环境: {env}")
-        self.trade_ctx = OpenSecTradeContext(filter_trdmarket=TrdMarket.US)
+        self.trade_ctx = OpenSecTradeContext(
+            filter_trdmarket=TrdMarket.US, host=host, port=port
+        )
         
         # 解锁交易（如果需要）
         if unlock_password:
@@ -165,20 +180,14 @@ class FutuBroker:
         
         logger.info(f"获取K线数据: {symbol}, 类型: {ktype}, 数量: {count}")
         
-        if start_date and end_date:
-            ret, data = self.quote_ctx.request_history_kline(
-                symbol,
-                start=start_date,
-                end=end_date,
-                ktype=kl_type,
-                max_count=count,
-            )
-        else:
-            ret, data = self.quote_ctx.get_cur_kline(
-                symbol,
-                ktype=kl_type,
-                count=count,
-            )
+        # 统一使用request_history_kline（返回3个值: ret, data, page_req_key）
+        kwargs = {'ktype': kl_type, 'max_count': count}
+        if start_date:
+            kwargs['start'] = start_date
+        if end_date:
+            kwargs['end'] = end_date
+        
+        ret, data, _ = self.quote_ctx.request_history_kline(symbol, **kwargs)
         
         if ret != futu.RET_OK:
             logger.error(f"获取K线数据失败: {data}")
