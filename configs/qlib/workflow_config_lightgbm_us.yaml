@@ -1,15 +1,8 @@
 qlib_init:
-  provider_uri: "/Users/lailixiang/.qlib/qlib_data/us_data"
+  provider_uri: "~/.qlib/qlib_data/us_data"
   region: us
 
-market: &market all
-
-filter:
-  filter_pipeline:
-    - class: ExpressionDFilter
-      module_path: qlib.data.filter
-      kwargs:
-        rule_expression: "Ref($close, -60)/Ref($close, -20)>1.1"
+market: &market sp500
 
 data_handler_config: &data_handler_config
   start_time: 2008-01-01
@@ -24,14 +17,20 @@ port_analysis_config: &port_analysis_config
     module_path: qlib.contrib.strategy
     kwargs:
       signal: <PRED>
-      topk: 50
-      n_drop: 5
+      topk: 30
+      n_drop: 3
   backtest:
     start_time: 2017-01-01
     end_time: 2020-08-01
     account: 100000000
-  benchmark:
-    - SPY
+    benchmark: SPY
+    exchange_kwargs:
+      limit_threshold: null
+      deal_price: close
+      open_cost: 0.0005
+      close_cost: 0.0005
+      min_cost: 1.0
+      trade_unit: 1
 
 task:
   model:
@@ -46,7 +45,7 @@ task:
       lambda_l2: 580.9768
       max_depth: 8
       num_leaves: 250
-      num_threads: 20
+      num_threads: 8
   dataset:
     class: DatasetH
     module_path: qlib.data.dataset

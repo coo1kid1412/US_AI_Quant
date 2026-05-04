@@ -117,12 +117,15 @@
 
 ## 7. 下一步计划
 
-### Phase 4: TradingAgents集成
-- ACT_16: 扩展市场分析师（美股支持）
-- ACT_17: 设计Qlib信号传递机制
-- ACT_18: 集成富途Broker到交易员模块
-- ACT_19: 端到端流程测试
-- ACT_20: 性能优化与调优
+### Phase 4: Qlib Alpha Pipeline (已修订为v2.0方案)
+
+> 注: 原计划为TradingAgents集成, 已于2026-05-04修订为Qlib Alpha Pipeline + RD-Agent范式.
+> 详见 PROJECT_PLAN.md v2.0
+
+- ACT_16: Alpha因子库建设 (已完成)
+- ACT_17: HIST模型训练 (已完成)
+- ACT_18-21: LightGBM Pipeline, 回测, 滚动训练, MLflow (代码完成, 待验证)
+- ACT_22: Phase 4 端到端验证 (待数据更新完成)
 
 ## 8. 代码提交记录
 

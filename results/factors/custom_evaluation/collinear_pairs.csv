@@ -1,0 +1,4 @@
+,factor_a,factor_b,correlation
+0,MOM60,MOM_DIVERGE,0.9442
+1,DIST_MA20,RSI_14,0.839
+2,MOM20,MOM_ACCEL,0.74

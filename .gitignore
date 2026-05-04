@@ -30,28 +30,41 @@ us_quant_env/
 
 # Data files (too large for git)
 data/
-*.csv
 *.parquet
 *.h5
 *.hdf5
 
-# Qlib cache
+# Large binary results (pkl > 1MB, reproducible via scripts)
+*.pkl
+
+# CSV in data/ dirs excluded, but allow small reference CSVs in results/
+data/**/*.csv
+
+# Qlib cache & local data
 .qlib/
+
+# MLflow local tracking
+mlruns/
+mlruns.db
+
+# AutoDL package (839MB+, reproducible via pack_autodl_us.sh)
+autodl_package/
 
 # Logs
 logs/
 *.log
 
-# Results (keep git tracking, ignore actual data)
-results/backtest/*.json
-results/backtest/*.csv
-results/signals/*.json
-results/signals/*.csv
-results/factors/*.pkl
-results/factors/*.parquet
-!results/backtest/.gitkeep
-!results/signals/.gitkeep
-!results/factors/.gitkeep
+# Results: exclude large files, keep small reference outputs
+results/**/pred.pkl
+results/**/rolling_pred.pkl
+results/**/report_normal.pkl
+results/**/indicator.pkl
+!results/**/eval_results.json
+!results/**/feature_importance.csv
+!results/**/grid_search_results.csv
+!results/**/backtest_report.json
+!results/**/rolling_eval_results.json
+!results/**/rolling_ic_timeline.csv
 
 # Jupyter
 .ipynb_checkpoints/

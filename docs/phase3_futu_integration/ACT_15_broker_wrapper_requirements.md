@@ -3,7 +3,7 @@
 ## 1. ACT概述
 
 ### 1.1 目标
-封装富途OpenAPI为统一的Broker接口类，提供简洁的交易抽象层，便于TradingAgents和Qlib调用，屏蔽底层API复杂性。
+封装富途OpenAPI为统一的Broker接口类，提供简洁的交易抽象层，便于Alpha Pipeline信号执行和Qlib调用，屏蔽底层API复杂性。
 
 ### 1.2 范围
 - 设计Broker接口抽象

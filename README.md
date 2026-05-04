@@ -1,6 +1,6 @@
 # US_AI_Quant - 美股AI量化交易系统
 
-> 基于Qlib + 富途OpenAPI + TradingAgents的智能量化交易平台
+> 基于 Qlib Alpha Pipeline + RD-Agent 自动化研究 + 富途OpenAPI 的系统化量化交易平台
 
 ## ⚠️ 安全警告（最高优先级）
 
@@ -23,11 +23,11 @@
 
 ## 项目简介
 
-本项目旨在构建一个基于AI的美股量化交易系统，集成：
-- **Qlib**: 微软AI量化研究框架
-- **富途OpenAPI**: 美股程序化交易
-- **TradingAgents**: 多智能体决策系统
-- **RD-Agent** (可选): 自动化因子挖掘
+本项目旨在构建一个系统化的美股量化交易系统，核心架构：
+- **Qlib Alpha Pipeline**: 因子工程 → 模型训练 → 滚动回测 → 信号生成
+- **富途OpenAPI**: 准实时美股程序化交易（信号执行、仓位管理）
+- **RD-Agent**: LLM驱动的自动化因子挖掘与模型迭代
+- **风控引擎**: 回撤控制、集中度限制、止损机制
 
 ## 环境状态
 
@@ -118,11 +118,21 @@ US_AI_Quant/
 - [x] 单元测试9/9通过
 - [x] 集成测试通过（OpenD在线时）
 
-### ⏸️ Phase 4-7: 待启动
-- [ ] TradingAgents集成
-- [ ] 策略优化与回测
-- [ ] 实盘仿真
-- [ ] RD-Agent部署（可选）
+### Phase 4: Qlib Alpha Pipeline（进行中）
+- [x] ACT_16: Alpha因子库建设 (Alpha158 + 14 custom factors)
+- [x] ACT_17: HIST模型训练 (IC=0.0209, Sharpe=1.2324)
+- [x] ACT_18+19+20+21: Pipeline脚本开发（代码完成，待数据验证）
+  - `scripts/train_lgbm_us.py` - LightGBM/DEnsemble训练
+  - `scripts/backtest_us.py` - 独立回测引擎
+  - `scripts/rolling_train_us.py` - RollingGen滚动训练
+  - `scripts/run_pipeline_us.py` - 端到端Pipeline
+  - `src/research/workflow/experiment_manager.py` - MLflow实验管理
+- [ ] ACT_22: Phase 4 端到端验证（等待数据更新完成）
+
+### Phase 5-7: 待启动
+- [ ] Phase 5: 信号执行与风控引擎（FutuBroker执行、仓位管理、风控）
+- [ ] Phase 6: RD-Agent自动化研究（因子挖掘、模型迭代、协同优化）
+- [ ] Phase 7: 全链路仿真与持续优化（模拟盘运行、监控、实盘准备）
 
 ## 重要提示
 
@@ -136,11 +146,12 @@ US_AI_Quant/
 - **量化框架**: Qlib 0.9.7
 - **券商API**: 富途OpenAPI
 - **机器学习**: PyTorch, LightGBM, XGBoost
+- **实验管理**: MLflow 3.11
 - **数据源**: Yahoo Finance (yfinance)
 - **系统**: macOS Intel x86_64
 
 ---
 
 **创建日期**: 2026-05-02
-**最后更新**: 2026-05-03
-**状态**: Phase 3 完成 ✅ | 交易环境: 仅限模拟盘（实盘禁令生效中）
+**最后更新**: 2026-05-04
+**状态**: Phase 3 完成 | Phase 4 代码完成(待验证) | 数据更新中 | 交易环境: 仅限模拟盘(实盘禁令生效中)

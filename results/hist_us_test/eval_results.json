@@ -1,0 +1,24 @@
+{
+  "IC_mean": 0.02094362034099207,
+  "IC_std": 0.21606165325610055,
+  "ICIR": 0.09693353737356811,
+  "RankIC_mean": 0.02009664955234948,
+  "RankIC_std": 0.21809838540045434,
+  "RankICIR": 0.09214488000613813,
+  "num_days": 91.0,
+  "num_samples": 45710.0,
+  "long_short_return_daily": 0.057249645915624606,
+  "long_short_return_annual": 14.4269107707374,
+  "long_short_sharpe": 1.2323696483459659,
+  "best_epoch": 0,
+  "best_valid_ic": 0.03991620276596338,
+  "training_mode": "cold-start",
+  "time_windows": {
+    "train_start": "2008-01-01",
+    "train_end": "2020-03-31",
+    "valid_start": "2020-04-01",
+    "valid_end": "2020-06-30",
+    "test_start": "2020-07-01",
+    "test_end": "2020-11-10"
+  }
+}

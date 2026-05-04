@@ -1,0 +1,753 @@
+[7471:MainThread](2026-05-04 13:25:36,461) INFO - qlib.Initialization - [config.py:452] - default_conf: client.
+[7471:MainThread](2026-05-04 13:25:36,466) INFO - qlib.Initialization - [__init__.py:75] - qlib successfully initialized based on client settings.
+[7471:MainThread](2026-05-04 13:25:36,466) INFO - qlib.Initialization - [__init__.py:77] - data_path={'__DEFAULT_FREQ': PosixPath('/root/autodl-tmp/us_data')}
+ModuleNotFoundError. CatBoostModel are skipped. (optional: maybe installing CatBoostModel can fix it.)
+ModuleNotFoundError. XGBModel is skipped(optional: maybe installing xgboost can fix it).
+
+======================================================================
+  HIST Model Training - US Stocks
+  Market: sp500 | Epochs: 100 | LR: 0.0001
+  Hidden: 64 | GPU: 0 | Seed: 42
+  Train: 2008-01-01 ~ 2016-12-31
+  Valid: 2017-01-01 ~ 2018-12-31
+  Test:  2019-01-01 ~ 2020-08-01
+======================================================================
+
+[1/5] Initializing Qlib (US)...
+  Provider: /root/.qlib/qlib_data/us_data
+
+[2/5] Building dataset (USAlpha360, d_feat=5)...
+[7471:MainThread](2026-05-04 13:26:24,724) INFO - qlib.timer - [log.py:127] - Time cost: 48.255s | Loading data Done
+[7471:MainThread](2026-05-04 13:26:53,223) INFO - qlib.timer - [log.py:127] - Time cost: 25.216s | RobustZScoreNorm Done
+[7471:MainThread](2026-05-04 13:26:59,601) INFO - qlib.timer - [log.py:127] - Time cost: 6.377s | Fillna Done
+[7471:MainThread](2026-05-04 13:27:04,658) INFO - qlib.timer - [log.py:127] - Time cost: 1.927s | DropnaLabel Done
+/root/miniconda3/lib/python3.10/site-packages/qlib/data/dataset/processor.py:358: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[cols] = t
+[7471:MainThread](2026-05-04 13:27:05,120) INFO - qlib.timer - [log.py:127] - Time cost: 0.461s | CSRankNorm Done
+[7471:MainThread](2026-05-04 13:27:05,224) INFO - qlib.timer - [log.py:127] - Time cost: 40.499s | fit & process data Done
+[7471:MainThread](2026-05-04 13:27:05,225) INFO - qlib.timer - [log.py:127] - Time cost: 88.757s | Init data Done
+[7471:MainThread](2026-05-04 13:27:07,557) INFO - qlib.HIST_US - [train_hist_us.py:166] - HIST US stock version...
+[7471:MainThread](2026-05-04 13:27:07,657) INFO - qlib.HIST_US - [train_hist_us.py:188] - HIST parameters:
+  d_feat=5, hidden_size=64, num_layers=2
+  dropout=0.0, n_epochs=100, lr=0.0001
+  metric=ic, early_stop=15, loss=mse
+  base_model=GRU, optimizer=adam
+  device=cuda:0, seed=42
+[7471:MainThread](2026-05-04 13:27:07,693) INFO - qlib.HIST_US - [train_hist_us.py:209] - Model size: 0.31 MB (80452 params)
+[7471:MainThread](2026-05-04 13:27:12,425) INFO - qlib.HIST_US - [train_hist_us.py:329] - Train samples: 938009, Valid samples: 243614
+[7471:MainThread](2026-05-04 13:27:13,377) INFO - qlib.HIST_US - [train_hist_us.py:338] - Feature dim: 300 (expected: 300)
+[7471:MainThread](2026-05-04 13:27:13,382) INFO - qlib.HIST_US - [train_hist_us.py:367] - Loaded 10 pretrained base model params
+[7471:MainThread](2026-05-04 13:27:13,382) INFO - qlib.HIST_US - [train_hist_us.py:370] - Starting training...
+[7471:MainThread](2026-05-04 13:27:13,383) INFO - qlib.HIST_US - [train_hist_us.py:375] - Pre-loading all data to GPU...
+[7471:MainThread](2026-05-04 13:27:14,480) INFO - qlib.HIST_US - [train_hist_us.py:400] - GPU pre-load done in 1.1s, GPU memory: 1367MB, train: 2267 days, valid: 502 days
+[7471:MainThread](2026-05-04 13:27:14,566) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 0 start ---
+[7471:MainThread](2026-05-04 13:27:14,977) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.228783
+[7471:MainThread](2026-05-04 13:27:26,007) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.985434
+[7471:MainThread](2026-05-04 13:27:35,598) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.997700
+[7471:MainThread](2026-05-04 13:27:45,300) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.995459
+[7471:MainThread](2026-05-04 13:27:54,969) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.984730
+[7471:MainThread](2026-05-04 13:28:00,802) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 46.2s
+[7471:MainThread](2026-05-04 13:28:00,827) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:28:07,002) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:28:08,482) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.7s
+[7471:MainThread](2026-05-04 13:28:08,483) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   0 | Train IC: 0.009456 | Valid IC: -0.001425 | Train Loss: 0.997740 | Valid Loss: 0.998053
+[7471:MainThread](2026-05-04 13:28:08,486) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 1 start ---
+[7471:MainThread](2026-05-04 13:28:08,503) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.985785
+[7471:MainThread](2026-05-04 13:28:18,461) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.996895
+[7471:MainThread](2026-05-04 13:28:27,689) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.002394
+[7471:MainThread](2026-05-04 13:28:38,520) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.997135
+[7471:MainThread](2026-05-04 13:28:48,469) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.998854
+[7471:MainThread](2026-05-04 13:28:54,309) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 45.8s
+[7471:MainThread](2026-05-04 13:28:54,317) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:29:00,756) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:29:02,289) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 13:29:02,290) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   1 | Train IC: 0.010879 | Valid IC: -0.001500 | Train Loss: 0.997505 | Valid Loss: 0.997755
+[7471:MainThread](2026-05-04 13:29:02,290) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 2 start ---
+[7471:MainThread](2026-05-04 13:29:02,302) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.989736
+[7471:MainThread](2026-05-04 13:29:12,406) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.997231
+[7471:MainThread](2026-05-04 13:29:23,346) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.008102
+[7471:MainThread](2026-05-04 13:29:34,714) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.009452
+[7471:MainThread](2026-05-04 13:29:45,273) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.996205
+[7471:MainThread](2026-05-04 13:29:50,750) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.5s
+[7471:MainThread](2026-05-04 13:29:50,755) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:29:56,982) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:29:58,410) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.7s
+[7471:MainThread](2026-05-04 13:29:58,411) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   2 | Train IC: -0.002134 | Valid IC: 0.002278 | Train Loss: 0.998013 | Valid Loss: 0.997827
+[7471:MainThread](2026-05-04 13:29:58,414) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 3 start ---
+[7471:MainThread](2026-05-04 13:29:58,424) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.995445
+[7471:MainThread](2026-05-04 13:30:08,874) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.998079
+[7471:MainThread](2026-05-04 13:30:20,416) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.004187
+[7471:MainThread](2026-05-04 13:30:31,543) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.997150
+[7471:MainThread](2026-05-04 13:30:42,713) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.998066
+[7471:MainThread](2026-05-04 13:30:48,278) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.9s
+[7471:MainThread](2026-05-04 13:30:48,285) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:30:54,744) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:30:56,293) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 13:30:56,294) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   3 | Train IC: 0.013401 | Valid IC: 0.001403 | Train Loss: 0.997474 | Valid Loss: 0.997663
+[7471:MainThread](2026-05-04 13:30:56,294) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 4 start ---
+[7471:MainThread](2026-05-04 13:30:56,313) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.999376
+[7471:MainThread](2026-05-04 13:31:07,009) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.993133
+[7471:MainThread](2026-05-04 13:31:18,302) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.996617
+[7471:MainThread](2026-05-04 13:31:29,672) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.001132
+[7471:MainThread](2026-05-04 13:31:40,608) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.002703
+[7471:MainThread](2026-05-04 13:31:46,388) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.1s
+[7471:MainThread](2026-05-04 13:31:46,396) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:31:52,857) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:31:54,429) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 13:31:54,429) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   4 | Train IC: 0.011561 | Valid IC: -0.001199 | Train Loss: 0.997602 | Valid Loss: 0.998027
+[7471:MainThread](2026-05-04 13:31:54,430) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 5 start ---
+[7471:MainThread](2026-05-04 13:31:54,445) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.001606
+[7471:MainThread](2026-05-04 13:32:05,691) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.997159
+[7471:MainThread](2026-05-04 13:32:14,945) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.996560
+[7471:MainThread](2026-05-04 13:32:25,586) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.996544
+[7471:MainThread](2026-05-04 13:32:36,812) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.998834
+[7471:MainThread](2026-05-04 13:32:42,618) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.2s
+[7471:MainThread](2026-05-04 13:32:42,629) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:32:48,929) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:32:50,473) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 13:32:50,473) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   5 | Train IC: 0.012027 | Valid IC: -0.002222 | Train Loss: 0.997483 | Valid Loss: 0.998009
+[7471:MainThread](2026-05-04 13:32:50,474) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 6 start ---
+[7471:MainThread](2026-05-04 13:32:50,490) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.992804
+[7471:MainThread](2026-05-04 13:33:02,334) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.002069
+[7471:MainThread](2026-05-04 13:33:13,656) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.002033
+[7471:MainThread](2026-05-04 13:33:24,275) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.997900
+[7471:MainThread](2026-05-04 13:33:34,695) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.999092
+[7471:MainThread](2026-05-04 13:33:38,646) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.2s
+[7471:MainThread](2026-05-04 13:33:38,651) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:33:44,851) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:33:46,320) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.7s
+[7471:MainThread](2026-05-04 13:33:46,321) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   6 | Train IC: 0.014063 | Valid IC: -0.001539 | Train Loss: 0.997444 | Valid Loss: 0.997803
+[7471:MainThread](2026-05-04 13:33:46,321) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 7 start ---
+[7471:MainThread](2026-05-04 13:33:46,339) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.997668
+[7471:MainThread](2026-05-04 13:33:57,716) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.996286
+[7471:MainThread](2026-05-04 13:34:08,100) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.000473
+[7471:MainThread](2026-05-04 13:34:18,991) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.977226
+[7471:MainThread](2026-05-04 13:34:27,649) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.986826
+[7471:MainThread](2026-05-04 13:34:33,553) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 47.2s
+[7471:MainThread](2026-05-04 13:34:33,564) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:34:40,063) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:34:41,624) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.1s
+[7471:MainThread](2026-05-04 13:34:41,625) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   7 | Train IC: 0.015652 | Valid IC: 0.002398 | Train Loss: 0.997423 | Valid Loss: 0.997628
+[7471:MainThread](2026-05-04 13:34:41,628) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 8 start ---
+[7471:MainThread](2026-05-04 13:34:41,647) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.995421
+[7471:MainThread](2026-05-04 13:34:52,790) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.991706
+[7471:MainThread](2026-05-04 13:35:03,541) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.995482
+[7471:MainThread](2026-05-04 13:35:14,570) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.985405
+[7471:MainThread](2026-05-04 13:35:24,714) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.996897
+[7471:MainThread](2026-05-04 13:35:30,517) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.9s
+[7471:MainThread](2026-05-04 13:35:30,521) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:35:36,854) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:35:38,327) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:35:38,328) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   8 | Train IC: 0.017134 | Valid IC: 0.005474 | Train Loss: 0.997447 | Valid Loss: 0.997590
+[7471:MainThread](2026-05-04 13:35:38,331) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 9 start ---
+[7471:MainThread](2026-05-04 13:35:38,341) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.996271
+[7471:MainThread](2026-05-04 13:35:49,435) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.996072
+[7471:MainThread](2026-05-04 13:36:00,361) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.995521
+[7471:MainThread](2026-05-04 13:36:11,957) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.995489
+[7471:MainThread](2026-05-04 13:36:22,437) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.007895
+[7471:MainThread](2026-05-04 13:36:28,058) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.7s
+[7471:MainThread](2026-05-04 13:36:28,069) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:36:34,407) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:36:35,908) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:36:35,908) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch   9 | Train IC: 0.009030 | Valid IC: 0.006934 | Train Loss: 0.997632 | Valid Loss: 0.997653
+[7471:MainThread](2026-05-04 13:36:35,911) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 10 start ---
+[7471:MainThread](2026-05-04 13:36:35,928) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.994971
+[7471:MainThread](2026-05-04 13:36:47,146) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.997623
+[7471:MainThread](2026-05-04 13:36:57,167) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.000626
+[7471:MainThread](2026-05-04 13:37:07,863) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.006519
+[7471:MainThread](2026-05-04 13:37:18,688) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.003499
+[7471:MainThread](2026-05-04 13:37:24,567) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.7s
+[7471:MainThread](2026-05-04 13:37:24,578) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:37:30,907) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:37:32,409) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:37:32,409) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  10 | Train IC: 0.016020 | Valid IC: 0.001364 | Train Loss: 0.997415 | Valid Loss: 0.997651
+[7471:MainThread](2026-05-04 13:37:32,410) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 11 start ---
+[7471:MainThread](2026-05-04 13:37:32,424) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.003707
+[7471:MainThread](2026-05-04 13:37:42,496) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.002681
+[7471:MainThread](2026-05-04 13:37:53,636) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.997038
+[7471:MainThread](2026-05-04 13:38:03,802) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.997064
+[7471:MainThread](2026-05-04 13:38:14,774) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.996552
+[7471:MainThread](2026-05-04 13:38:19,847) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 47.4s
+[7471:MainThread](2026-05-04 13:38:19,858) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:38:26,146) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:38:27,619) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:38:27,620) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  11 | Train IC: 0.014614 | Valid IC: -0.001453 | Train Loss: 0.997332 | Valid Loss: 0.997788
+[7471:MainThread](2026-05-04 13:38:27,620) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 12 start ---
+[7471:MainThread](2026-05-04 13:38:27,638) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.995137
+[7471:MainThread](2026-05-04 13:38:38,441) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.002193
+[7471:MainThread](2026-05-04 13:38:49,874) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.995848
+[7471:MainThread](2026-05-04 13:39:01,244) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.997143
+[7471:MainThread](2026-05-04 13:39:12,686) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.997847
+[7471:MainThread](2026-05-04 13:39:18,311) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.7s
+[7471:MainThread](2026-05-04 13:39:18,322) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:39:24,808) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:39:26,370) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.1s
+[7471:MainThread](2026-05-04 13:39:26,370) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  12 | Train IC: 0.016132 | Valid IC: 0.005123 | Train Loss: 0.997626 | Valid Loss: 0.997682
+[7471:MainThread](2026-05-04 13:39:26,371) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 13 start ---
+[7471:MainThread](2026-05-04 13:39:26,384) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.986702
+[7471:MainThread](2026-05-04 13:39:36,728) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.998967
+[7471:MainThread](2026-05-04 13:39:47,099) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.001928
+[7471:MainThread](2026-05-04 13:39:57,191) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.996436
+[7471:MainThread](2026-05-04 13:40:06,737) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.996069
+[7471:MainThread](2026-05-04 13:40:12,587) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 46.2s
+[7471:MainThread](2026-05-04 13:40:12,592) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:40:18,919) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:40:20,425) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:40:20,425) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  13 | Train IC: 0.016495 | Valid IC: 0.000395 | Train Loss: 0.997303 | Valid Loss: 0.997837
+[7471:MainThread](2026-05-04 13:40:20,426) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 14 start ---
+[7471:MainThread](2026-05-04 13:40:20,444) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.004329
+[7471:MainThread](2026-05-04 13:40:31,556) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.992799
+[7471:MainThread](2026-05-04 13:40:41,750) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.002038
+[7471:MainThread](2026-05-04 13:40:52,562) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.994571
+[7471:MainThread](2026-05-04 13:41:03,705) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.997695
+[7471:MainThread](2026-05-04 13:41:09,782) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.4s
+[7471:MainThread](2026-05-04 13:41:09,792) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:41:16,100) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:41:17,571) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:41:17,571) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  14 | Train IC: 0.018335 | Valid IC: 0.002413 | Train Loss: 0.997382 | Valid Loss: 0.997800
+[7471:MainThread](2026-05-04 13:41:17,572) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 15 start ---
+[7471:MainThread](2026-05-04 13:41:17,591) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.999042
+[7471:MainThread](2026-05-04 13:41:29,250) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.000304
+[7471:MainThread](2026-05-04 13:41:40,718) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.992841
+[7471:MainThread](2026-05-04 13:41:51,990) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.996349
+[7471:MainThread](2026-05-04 13:42:02,375) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.992688
+[7471:MainThread](2026-05-04 13:42:07,818) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.2s
+[7471:MainThread](2026-05-04 13:42:07,830) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:42:14,230) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:42:15,728) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 13:42:15,728) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  15 | Train IC: 0.016357 | Valid IC: 0.000100 | Train Loss: 0.997314 | Valid Loss: 0.997925
+[7471:MainThread](2026-05-04 13:42:15,729) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 16 start ---
+[7471:MainThread](2026-05-04 13:42:15,754) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.989354
+[7471:MainThread](2026-05-04 13:42:27,020) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.001838
+[7471:MainThread](2026-05-04 13:42:37,401) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.005064
+[7471:MainThread](2026-05-04 13:42:48,368) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.000918
+[7471:MainThread](2026-05-04 13:42:59,626) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.010689
+[7471:MainThread](2026-05-04 13:43:05,728) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.0s
+[7471:MainThread](2026-05-04 13:43:05,741) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:43:12,168) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:43:13,691) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 13:43:13,691) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  16 | Train IC: 0.015977 | Valid IC: -0.001162 | Train Loss: 0.997298 | Valid Loss: 0.997934
+[7471:MainThread](2026-05-04 13:43:13,692) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 17 start ---
+[7471:MainThread](2026-05-04 13:43:13,706) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.992115
+[7471:MainThread](2026-05-04 13:43:25,094) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.999935
+[7471:MainThread](2026-05-04 13:43:35,583) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.003034
+[7471:MainThread](2026-05-04 13:43:46,873) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.999398
+[7471:MainThread](2026-05-04 13:43:57,839) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.991058
+[7471:MainThread](2026-05-04 13:44:03,902) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.2s
+[7471:MainThread](2026-05-04 13:44:03,909) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:44:10,173) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:44:11,649) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.7s
+[7471:MainThread](2026-05-04 13:44:11,650) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  17 | Train IC: 0.016040 | Valid IC: -0.000301 | Train Loss: 0.997271 | Valid Loss: 0.997831
+[7471:MainThread](2026-05-04 13:44:11,651) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 18 start ---
+[7471:MainThread](2026-05-04 13:44:11,667) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.998261
+[7471:MainThread](2026-05-04 13:44:23,262) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.999934
+[7471:MainThread](2026-05-04 13:44:34,519) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.994297
+[7471:MainThread](2026-05-04 13:44:44,389) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.996216
+[7471:MainThread](2026-05-04 13:44:55,199) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.994580
+[7471:MainThread](2026-05-04 13:45:01,239) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.6s
+[7471:MainThread](2026-05-04 13:45:01,250) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:45:07,718) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:45:09,289) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 13:45:09,289) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  18 | Train IC: 0.019084 | Valid IC: 0.005113 | Train Loss: 0.997226 | Valid Loss: 0.997612
+[7471:MainThread](2026-05-04 13:45:09,290) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 19 start ---
+[7471:MainThread](2026-05-04 13:45:09,309) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.993452
+[7471:MainThread](2026-05-04 13:45:20,360) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.997952
+[7471:MainThread](2026-05-04 13:45:31,666) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.993821
+[7471:MainThread](2026-05-04 13:45:42,844) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.998608
+[7471:MainThread](2026-05-04 13:45:53,629) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.995193
+[7471:MainThread](2026-05-04 13:45:59,730) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.4s
+[7471:MainThread](2026-05-04 13:45:59,742) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:46:05,993) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:46:07,484) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:46:07,484) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  19 | Train IC: 0.018606 | Valid IC: 0.002088 | Train Loss: 0.997193 | Valid Loss: 0.997707
+[7471:MainThread](2026-05-04 13:46:07,485) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 20 start ---
+[7471:MainThread](2026-05-04 13:46:07,503) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.991141
+[7471:MainThread](2026-05-04 13:46:18,787) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.985462
+[7471:MainThread](2026-05-04 13:46:29,938) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.995778
+[7471:MainThread](2026-05-04 13:46:41,096) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.999081
+[7471:MainThread](2026-05-04 13:46:52,337) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.025618
+[7471:MainThread](2026-05-04 13:46:58,395) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.9s
+[7471:MainThread](2026-05-04 13:46:58,404) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:47:04,868) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:47:06,436) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 13:47:06,436) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  20 | Train IC: 0.017734 | Valid IC: 0.001115 | Train Loss: 0.997265 | Valid Loss: 0.997851
+[7471:MainThread](2026-05-04 13:47:06,437) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 21 start ---
+[7471:MainThread](2026-05-04 13:47:06,447) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.985250
+[7471:MainThread](2026-05-04 13:47:17,769) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.006637
+[7471:MainThread](2026-05-04 13:47:29,157) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.999346
+[7471:MainThread](2026-05-04 13:47:39,308) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.017161
+[7471:MainThread](2026-05-04 13:47:49,925) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.988778
+[7471:MainThread](2026-05-04 13:47:55,903) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.5s
+[7471:MainThread](2026-05-04 13:47:55,914) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:48:02,427) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:48:03,959) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.1s
+[7471:MainThread](2026-05-04 13:48:03,960) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  21 | Train IC: 0.020310 | Valid IC: 0.004741 | Train Loss: 0.997162 | Valid Loss: 0.997610
+[7471:MainThread](2026-05-04 13:48:03,960) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 22 start ---
+[7471:MainThread](2026-05-04 13:48:03,976) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.005026
+[7471:MainThread](2026-05-04 13:48:14,903) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.004726
+[7471:MainThread](2026-05-04 13:48:25,968) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.999439
+[7471:MainThread](2026-05-04 13:48:37,427) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.996114
+[7471:MainThread](2026-05-04 13:48:48,825) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.989737
+[7471:MainThread](2026-05-04 13:48:54,964) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 51.0s
+[7471:MainThread](2026-05-04 13:48:54,968) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:49:01,200) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:49:02,652) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.7s
+[7471:MainThread](2026-05-04 13:49:02,652) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  22 | Train IC: 0.019944 | Valid IC: 0.008356 | Train Loss: 0.997194 | Valid Loss: 0.997573
+[7471:MainThread](2026-05-04 13:49:02,655) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 23 start ---
+[7471:MainThread](2026-05-04 13:49:02,669) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.996495
+[7471:MainThread](2026-05-04 13:49:14,308) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.998206
+[7471:MainThread](2026-05-04 13:49:25,597) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.996974
+[7471:MainThread](2026-05-04 13:49:36,479) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.998062
+[7471:MainThread](2026-05-04 13:49:47,141) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.004545
+[7471:MainThread](2026-05-04 13:49:52,997) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.3s
+[7471:MainThread](2026-05-04 13:49:53,012) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:49:59,366) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:50:00,878) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 13:50:00,879) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  23 | Train IC: 0.021021 | Valid IC: 0.005334 | Train Loss: 0.997114 | Valid Loss: 0.997617
+[7471:MainThread](2026-05-04 13:50:00,879) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 24 start ---
+[7471:MainThread](2026-05-04 13:50:00,901) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.991283
+[7471:MainThread](2026-05-04 13:50:12,011) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.996554
+[7471:MainThread](2026-05-04 13:50:22,443) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.994601
+[7471:MainThread](2026-05-04 13:50:32,199) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.002747
+[7471:MainThread](2026-05-04 13:50:42,851) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.992110
+[7471:MainThread](2026-05-04 13:50:48,923) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.0s
+[7471:MainThread](2026-05-04 13:50:48,930) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:50:55,192) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:50:56,679) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:50:56,680) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  24 | Train IC: 0.021139 | Valid IC: 0.006479 | Train Loss: 0.997143 | Valid Loss: 0.997584
+[7471:MainThread](2026-05-04 13:50:56,680) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 25 start ---
+[7471:MainThread](2026-05-04 13:50:56,690) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.001804
+[7471:MainThread](2026-05-04 13:51:06,902) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.991077
+[7471:MainThread](2026-05-04 13:51:18,056) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.006200
+[7471:MainThread](2026-05-04 13:51:29,328) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.988524
+[7471:MainThread](2026-05-04 13:51:40,785) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.997292
+[7471:MainThread](2026-05-04 13:51:46,754) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.1s
+[7471:MainThread](2026-05-04 13:51:46,765) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:51:53,053) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:51:54,524) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:51:54,524) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  25 | Train IC: 0.021802 | Valid IC: 0.003790 | Train Loss: 0.997080 | Valid Loss: 0.997630
+[7471:MainThread](2026-05-04 13:51:54,525) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 26 start ---
+[7471:MainThread](2026-05-04 13:51:54,543) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.993868
+[7471:MainThread](2026-05-04 13:52:05,819) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.997179
+[7471:MainThread](2026-05-04 13:52:15,185) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.994431
+[7471:MainThread](2026-05-04 13:52:26,252) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.990177
+[7471:MainThread](2026-05-04 13:52:37,015) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.991263
+[7471:MainThread](2026-05-04 13:52:42,677) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.2s
+[7471:MainThread](2026-05-04 13:52:42,681) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:52:48,933) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:52:50,450) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:52:50,450) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  26 | Train IC: 0.021789 | Valid IC: 0.005363 | Train Loss: 0.997031 | Valid Loss: 0.997621
+[7471:MainThread](2026-05-04 13:52:50,451) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 27 start ---
+[7471:MainThread](2026-05-04 13:52:50,467) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.002392
+[7471:MainThread](2026-05-04 13:53:01,409) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.997701
+[7471:MainThread](2026-05-04 13:53:12,493) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.007372
+[7471:MainThread](2026-05-04 13:53:23,463) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.006848
+[7471:MainThread](2026-05-04 13:53:34,031) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.990369
+[7471:MainThread](2026-05-04 13:53:39,104) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.7s
+[7471:MainThread](2026-05-04 13:53:39,111) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:53:45,300) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:53:46,734) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.6s
+[7471:MainThread](2026-05-04 13:53:46,735) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  27 | Train IC: 0.019679 | Valid IC: 0.000683 | Train Loss: 0.997127 | Valid Loss: 0.997994
+[7471:MainThread](2026-05-04 13:53:46,735) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 28 start ---
+[7471:MainThread](2026-05-04 13:53:46,753) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.001569
+[7471:MainThread](2026-05-04 13:53:58,532) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.001511
+[7471:MainThread](2026-05-04 13:54:08,885) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.998873
+[7471:MainThread](2026-05-04 13:54:19,780) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.005860
+[7471:MainThread](2026-05-04 13:54:31,005) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.003007
+[7471:MainThread](2026-05-04 13:54:36,910) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.2s
+[7471:MainThread](2026-05-04 13:54:36,918) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:54:43,178) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:54:44,683) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:54:44,683) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  28 | Train IC: 0.020721 | Valid IC: -0.000123 | Train Loss: 0.997079 | Valid Loss: 0.997807
+[7471:MainThread](2026-05-04 13:54:44,684) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 29 start ---
+[7471:MainThread](2026-05-04 13:54:44,702) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.998214
+[7471:MainThread](2026-05-04 13:54:55,695) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.998591
+[7471:MainThread](2026-05-04 13:55:06,566) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.999373
+[7471:MainThread](2026-05-04 13:55:16,244) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.976360
+[7471:MainThread](2026-05-04 13:55:26,603) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.991533
+[7471:MainThread](2026-05-04 13:55:32,522) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 47.8s
+[7471:MainThread](2026-05-04 13:55:32,532) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:55:39,015) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:55:40,538) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 13:55:40,538) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  29 | Train IC: 0.017836 | Valid IC: 0.008331 | Train Loss: 0.997290 | Valid Loss: 0.997694
+[7471:MainThread](2026-05-04 13:55:40,539) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 30 start ---
+[7471:MainThread](2026-05-04 13:55:40,551) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.993207
+[7471:MainThread](2026-05-04 13:55:51,355) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.996334
+[7471:MainThread](2026-05-04 13:56:02,432) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.000733
+[7471:MainThread](2026-05-04 13:56:13,284) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.988867
+[7471:MainThread](2026-05-04 13:56:24,252) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.991953
+[7471:MainThread](2026-05-04 13:56:30,312) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.8s
+[7471:MainThread](2026-05-04 13:56:30,319) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:56:36,581) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:56:38,102) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 13:56:38,103) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  30 | Train IC: 0.022964 | Valid IC: 0.003907 | Train Loss: 0.996960 | Valid Loss: 0.997678
+[7471:MainThread](2026-05-04 13:56:38,103) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 31 start ---
+[7471:MainThread](2026-05-04 13:56:38,118) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.999437
+[7471:MainThread](2026-05-04 13:56:49,035) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.993511
+[7471:MainThread](2026-05-04 13:56:58,669) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.981470
+[7471:MainThread](2026-05-04 13:57:06,900) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.999258
+[7471:MainThread](2026-05-04 13:57:17,947) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.000947
+[7471:MainThread](2026-05-04 13:57:23,707) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 45.6s
+[7471:MainThread](2026-05-04 13:57:23,720) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:57:29,784) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:57:31,241) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.5s
+[7471:MainThread](2026-05-04 13:57:31,241) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  31 | Train IC: 0.021717 | Valid IC: 0.003497 | Train Loss: 0.997074 | Valid Loss: 0.997610
+[7471:MainThread](2026-05-04 13:57:31,242) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 32 start ---
+[7471:MainThread](2026-05-04 13:57:31,259) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.996545
+[7471:MainThread](2026-05-04 13:57:42,049) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.997839
+[7471:MainThread](2026-05-04 13:57:52,738) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.007071
+[7471:MainThread](2026-05-04 13:58:03,336) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.992939
+[7471:MainThread](2026-05-04 13:58:13,368) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.999126
+[7471:MainThread](2026-05-04 13:58:18,830) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 47.6s
+[7471:MainThread](2026-05-04 13:58:18,839) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:58:25,328) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:58:26,895) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.1s
+[7471:MainThread](2026-05-04 13:58:26,896) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  32 | Train IC: 0.023815 | Valid IC: 0.002695 | Train Loss: 0.996996 | Valid Loss: 0.997713
+[7471:MainThread](2026-05-04 13:58:26,896) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 33 start ---
+[7471:MainThread](2026-05-04 13:58:26,910) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.000178
+[7471:MainThread](2026-05-04 13:58:37,625) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.984850
+[7471:MainThread](2026-05-04 13:58:48,470) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.994817
+[7471:MainThread](2026-05-04 13:58:59,713) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.992707
+[7471:MainThread](2026-05-04 13:59:10,229) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.996620
+[7471:MainThread](2026-05-04 13:59:15,723) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.8s
+[7471:MainThread](2026-05-04 13:59:15,727) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 13:59:22,136) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 13:59:23,645) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 13:59:23,646) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  33 | Train IC: 0.024744 | Valid IC: 0.006675 | Train Loss: 0.996865 | Valid Loss: 0.997598
+[7471:MainThread](2026-05-04 13:59:23,646) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 34 start ---
+[7471:MainThread](2026-05-04 13:59:23,664) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.993408
+[7471:MainThread](2026-05-04 13:59:34,360) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.998110
+[7471:MainThread](2026-05-04 13:59:44,102) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.005662
+[7471:MainThread](2026-05-04 13:59:53,091) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.992675
+[7471:MainThread](2026-05-04 14:00:04,347) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.998941
+[7471:MainThread](2026-05-04 14:00:09,769) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 46.1s
+[7471:MainThread](2026-05-04 14:00:09,780) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:00:16,137) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:00:17,666) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 14:00:17,667) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  34 | Train IC: 0.022696 | Valid IC: 0.003607 | Train Loss: 0.996965 | Valid Loss: 0.997827
+[7471:MainThread](2026-05-04 14:00:17,667) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 35 start ---
+[7471:MainThread](2026-05-04 14:00:17,689) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.999858
+[7471:MainThread](2026-05-04 14:00:29,125) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.989977
+[7471:MainThread](2026-05-04 14:00:40,438) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.987933
+[7471:MainThread](2026-05-04 14:00:51,788) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.993402
+[7471:MainThread](2026-05-04 14:01:02,090) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.995845
+[7471:MainThread](2026-05-04 14:01:07,609) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.9s
+[7471:MainThread](2026-05-04 14:01:07,619) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:01:14,196) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:01:15,756) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.1s
+[7471:MainThread](2026-05-04 14:01:15,757) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  35 | Train IC: 0.025316 | Valid IC: 0.008419 | Train Loss: 0.996868 | Valid Loss: 0.997590
+[7471:MainThread](2026-05-04 14:01:15,760) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 36 start ---
+[7471:MainThread](2026-05-04 14:01:15,778) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.012196
+[7471:MainThread](2026-05-04 14:01:26,924) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.994575
+[7471:MainThread](2026-05-04 14:01:37,880) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.997614
+[7471:MainThread](2026-05-04 14:01:48,508) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.993817
+[7471:MainThread](2026-05-04 14:01:59,320) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.997824
+[7471:MainThread](2026-05-04 14:02:05,240) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.5s
+[7471:MainThread](2026-05-04 14:02:05,251) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:02:11,691) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:02:13,207) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 14:02:13,208) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  36 | Train IC: 0.025235 | Valid IC: 0.008562 | Train Loss: 0.996787 | Valid Loss: 0.997585
+[7471:MainThread](2026-05-04 14:02:13,211) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 37 start ---
+[7471:MainThread](2026-05-04 14:02:13,226) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.997773
+[7471:MainThread](2026-05-04 14:02:23,355) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.990167
+[7471:MainThread](2026-05-04 14:02:34,754) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.987591
+[7471:MainThread](2026-05-04 14:02:45,742) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.989382
+[7471:MainThread](2026-05-04 14:02:56,092) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.997310
+[7471:MainThread](2026-05-04 14:03:01,626) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.4s
+[7471:MainThread](2026-05-04 14:03:01,630) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:03:07,927) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:03:09,441) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 14:03:09,441) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  37 | Train IC: 0.024316 | Valid IC: 0.001574 | Train Loss: 0.996830 | Valid Loss: 0.997828
+[7471:MainThread](2026-05-04 14:03:09,442) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 38 start ---
+[7471:MainThread](2026-05-04 14:03:09,462) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.000172
+[7471:MainThread](2026-05-04 14:03:20,671) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.994143
+[7471:MainThread](2026-05-04 14:03:32,314) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.996758
+[7471:MainThread](2026-05-04 14:03:42,888) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.004530
+[7471:MainThread](2026-05-04 14:03:52,890) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.983850
+[7471:MainThread](2026-05-04 14:03:58,856) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.4s
+[7471:MainThread](2026-05-04 14:03:58,867) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:04:05,314) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:04:06,864) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 14:04:06,865) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  38 | Train IC: 0.026600 | Valid IC: 0.009777 | Train Loss: 0.996696 | Valid Loss: 0.997590
+[7471:MainThread](2026-05-04 14:04:06,868) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 39 start ---
+[7471:MainThread](2026-05-04 14:04:06,889) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.998227
+[7471:MainThread](2026-05-04 14:04:17,920) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.993333
+[7471:MainThread](2026-05-04 14:04:29,510) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.990949
+[7471:MainThread](2026-05-04 14:04:40,922) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.992410
+[7471:MainThread](2026-05-04 14:04:51,979) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.997362
+[7471:MainThread](2026-05-04 14:04:57,629) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.8s
+[7471:MainThread](2026-05-04 14:04:57,638) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:05:04,037) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:05:05,542) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 14:05:05,542) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  39 | Train IC: 0.025043 | Valid IC: 0.005192 | Train Loss: 0.996763 | Valid Loss: 0.997721
+[7471:MainThread](2026-05-04 14:05:05,543) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 40 start ---
+[7471:MainThread](2026-05-04 14:05:05,561) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.993018
+[7471:MainThread](2026-05-04 14:05:16,321) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.995787
+[7471:MainThread](2026-05-04 14:05:27,452) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.993508
+[7471:MainThread](2026-05-04 14:05:38,712) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.992200
+[7471:MainThread](2026-05-04 14:05:49,154) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.991470
+[7471:MainThread](2026-05-04 14:05:54,409) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.9s
+[7471:MainThread](2026-05-04 14:05:54,418) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:06:00,977) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:06:02,483) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.1s
+[7471:MainThread](2026-05-04 14:06:02,483) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  40 | Train IC: 0.028051 | Valid IC: 0.009448 | Train Loss: 0.996568 | Valid Loss: 0.997575
+[7471:MainThread](2026-05-04 14:06:02,484) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 41 start ---
+[7471:MainThread](2026-05-04 14:06:02,503) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.994131
+[7471:MainThread](2026-05-04 14:06:11,803) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.996063
+[7471:MainThread](2026-05-04 14:06:21,939) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.996631
+[7471:MainThread](2026-05-04 14:06:31,439) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.009677
+[7471:MainThread](2026-05-04 14:06:42,496) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.996031
+[7471:MainThread](2026-05-04 14:06:48,528) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 46.0s
+[7471:MainThread](2026-05-04 14:06:48,539) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:06:54,664) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:06:56,152) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.6s
+[7471:MainThread](2026-05-04 14:06:56,153) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  41 | Train IC: 0.028998 | Valid IC: 0.008843 | Train Loss: 0.996504 | Valid Loss: 0.997745
+[7471:MainThread](2026-05-04 14:06:56,153) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 42 start ---
+[7471:MainThread](2026-05-04 14:06:56,172) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.007523
+[7471:MainThread](2026-05-04 14:07:07,804) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.992830
+[7471:MainThread](2026-05-04 14:07:18,658) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.996664
+[7471:MainThread](2026-05-04 14:07:29,717) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.990585
+[7471:MainThread](2026-05-04 14:07:39,220) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.004478
+[7471:MainThread](2026-05-04 14:07:44,687) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.5s
+[7471:MainThread](2026-05-04 14:07:44,699) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:07:51,045) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:07:52,557) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 14:07:52,558) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  42 | Train IC: 0.029010 | Valid IC: 0.007420 | Train Loss: 0.996543 | Valid Loss: 0.997740
+[7471:MainThread](2026-05-04 14:07:52,558) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 43 start ---
+[7471:MainThread](2026-05-04 14:07:52,574) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.987913
+[7471:MainThread](2026-05-04 14:08:03,773) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.001437
+[7471:MainThread](2026-05-04 14:08:14,607) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.997965
+[7471:MainThread](2026-05-04 14:08:25,080) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.991757
+[7471:MainThread](2026-05-04 14:08:36,415) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.995352
+[7471:MainThread](2026-05-04 14:08:42,331) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.8s
+[7471:MainThread](2026-05-04 14:08:42,344) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:08:48,785) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:08:50,298) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 14:08:50,299) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  43 | Train IC: 0.027666 | Valid IC: 0.009022 | Train Loss: 0.996530 | Valid Loss: 0.997675
+[7471:MainThread](2026-05-04 14:08:50,299) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 44 start ---
+[7471:MainThread](2026-05-04 14:08:50,312) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.996693
+[7471:MainThread](2026-05-04 14:09:01,420) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.000958
+[7471:MainThread](2026-05-04 14:09:12,606) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.998925
+[7471:MainThread](2026-05-04 14:09:23,567) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.998488
+[7471:MainThread](2026-05-04 14:09:34,698) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.997808
+[7471:MainThread](2026-05-04 14:09:40,583) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 50.3s
+[7471:MainThread](2026-05-04 14:09:40,594) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:09:46,870) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:09:48,408) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 14:09:48,409) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  44 | Train IC: 0.027817 | Valid IC: 0.004523 | Train Loss: 0.996573 | Valid Loss: 0.998110
+[7471:MainThread](2026-05-04 14:09:48,409) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 45 start ---
+[7471:MainThread](2026-05-04 14:09:48,419) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.000330
+[7471:MainThread](2026-05-04 14:09:58,227) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.999855
+[7471:MainThread](2026-05-04 14:10:09,642) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.996285
+[7471:MainThread](2026-05-04 14:10:20,561) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.984126
+[7471:MainThread](2026-05-04 14:10:31,757) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.000465
+[7471:MainThread](2026-05-04 14:10:36,727) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.3s
+[7471:MainThread](2026-05-04 14:10:36,738) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:10:43,089) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:10:44,643) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 14:10:44,644) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  45 | Train IC: 0.027714 | Valid IC: 0.011636 | Train Loss: 0.996670 | Valid Loss: 0.997763
+[7471:MainThread](2026-05-04 14:10:44,647) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 46 start ---
+[7471:MainThread](2026-05-04 14:10:44,664) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.992604
+[7471:MainThread](2026-05-04 14:10:56,310) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.988049
+[7471:MainThread](2026-05-04 14:11:07,469) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.000932
+[7471:MainThread](2026-05-04 14:11:18,568) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.985825
+[7471:MainThread](2026-05-04 14:11:29,422) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.995563
+[7471:MainThread](2026-05-04 14:11:34,493) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.8s
+[7471:MainThread](2026-05-04 14:11:34,503) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:11:40,884) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:11:42,409) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 14:11:42,409) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  46 | Train IC: 0.030599 | Valid IC: 0.006690 | Train Loss: 0.996180 | Valid Loss: 0.997710
+[7471:MainThread](2026-05-04 14:11:42,410) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 47 start ---
+[7471:MainThread](2026-05-04 14:11:42,425) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.000370
+[7471:MainThread](2026-05-04 14:11:53,040) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.999292
+[7471:MainThread](2026-05-04 14:12:04,115) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.996654
+[7471:MainThread](2026-05-04 14:12:15,070) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.016837
+[7471:MainThread](2026-05-04 14:12:26,133) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.000461
+[7471:MainThread](2026-05-04 14:12:32,161) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.8s
+[7471:MainThread](2026-05-04 14:12:32,173) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:12:38,548) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:12:40,037) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 14:12:40,038) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  47 | Train IC: 0.031481 | Valid IC: 0.001236 | Train Loss: 0.996172 | Valid Loss: 0.997975
+[7471:MainThread](2026-05-04 14:12:40,039) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 48 start ---
+[7471:MainThread](2026-05-04 14:12:40,055) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.997199
+[7471:MainThread](2026-05-04 14:12:50,769) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.970913
+[7471:MainThread](2026-05-04 14:13:02,046) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.001482
+[7471:MainThread](2026-05-04 14:13:13,380) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.989366
+[7471:MainThread](2026-05-04 14:13:24,316) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.994730
+[7471:MainThread](2026-05-04 14:13:29,898) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.9s
+[7471:MainThread](2026-05-04 14:13:29,910) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:13:36,362) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:13:37,898) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 14:13:37,898) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  48 | Train IC: 0.030315 | Valid IC: 0.004263 | Train Loss: 0.996229 | Valid Loss: 0.997874
+[7471:MainThread](2026-05-04 14:13:37,899) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 49 start ---
+[7471:MainThread](2026-05-04 14:13:37,917) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.999703
+[7471:MainThread](2026-05-04 14:13:49,444) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.994326
+[7471:MainThread](2026-05-04 14:14:00,308) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.993816
+[7471:MainThread](2026-05-04 14:14:09,088) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.027546
+[7471:MainThread](2026-05-04 14:14:20,118) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.992411
+[7471:MainThread](2026-05-04 14:14:25,364) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 47.5s
+[7471:MainThread](2026-05-04 14:14:25,370) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:14:31,848) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:14:33,356) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 14:14:33,357) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  49 | Train IC: 0.036439 | Valid IC: 0.004197 | Train Loss: 0.995820 | Valid Loss: 0.997796
+[7471:MainThread](2026-05-04 14:14:33,357) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 50 start ---
+[7471:MainThread](2026-05-04 14:14:33,370) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.991935
+[7471:MainThread](2026-05-04 14:14:43,324) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.997573
+[7471:MainThread](2026-05-04 14:14:54,015) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.003579
+[7471:MainThread](2026-05-04 14:15:05,254) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.987914
+[7471:MainThread](2026-05-04 14:15:16,337) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.989730
+[7471:MainThread](2026-05-04 14:15:21,963) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.6s
+[7471:MainThread](2026-05-04 14:15:21,974) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:15:28,245) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:15:29,754) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 14:15:29,755) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  50 | Train IC: 0.034310 | Valid IC: -0.000141 | Train Loss: 0.996030 | Valid Loss: 0.998240
+[7471:MainThread](2026-05-04 14:15:29,755) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 51 start ---
+[7471:MainThread](2026-05-04 14:15:29,772) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.996180
+[7471:MainThread](2026-05-04 14:15:41,011) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.004125
+[7471:MainThread](2026-05-04 14:15:51,601) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.995726
+[7471:MainThread](2026-05-04 14:16:02,567) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.965389
+[7471:MainThread](2026-05-04 14:16:13,545) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.939244
+[7471:MainThread](2026-05-04 14:16:18,765) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.0s
+[7471:MainThread](2026-05-04 14:16:18,775) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:16:25,181) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:16:26,711) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 14:16:26,711) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  51 | Train IC: 0.036579 | Valid IC: 0.001440 | Train Loss: 0.995711 | Valid Loss: 0.998089
+[7471:MainThread](2026-05-04 14:16:26,712) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 52 start ---
+[7471:MainThread](2026-05-04 14:16:26,731) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.996833
+[7471:MainThread](2026-05-04 14:16:36,619) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.982161
+[7471:MainThread](2026-05-04 14:16:45,791) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.996012
+[7471:MainThread](2026-05-04 14:16:56,772) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.993478
+[7471:MainThread](2026-05-04 14:17:06,875) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.998359
+[7471:MainThread](2026-05-04 14:17:12,890) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 46.2s
+[7471:MainThread](2026-05-04 14:17:12,902) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:17:19,338) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:17:20,869) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 14:17:20,870) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  52 | Train IC: 0.038783 | Valid IC: -0.000013 | Train Loss: 0.995645 | Valid Loss: 0.998176
+[7471:MainThread](2026-05-04 14:17:20,870) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 53 start ---
+[7471:MainThread](2026-05-04 14:17:20,892) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.997726
+[7471:MainThread](2026-05-04 14:17:30,629) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.996224
+[7471:MainThread](2026-05-04 14:17:42,004) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.968845
+[7471:MainThread](2026-05-04 14:17:49,937) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=1.000557
+[7471:MainThread](2026-05-04 14:18:00,967) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.992450
+[7471:MainThread](2026-05-04 14:18:06,804) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 45.9s
+[7471:MainThread](2026-05-04 14:18:06,814) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:18:13,035) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:18:14,501) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.7s
+[7471:MainThread](2026-05-04 14:18:14,502) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  53 | Train IC: 0.037581 | Valid IC: 0.004954 | Train Loss: 0.995537 | Valid Loss: 0.997982
+[7471:MainThread](2026-05-04 14:18:14,503) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 54 start ---
+[7471:MainThread](2026-05-04 14:18:14,521) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.997275
+[7471:MainThread](2026-05-04 14:18:25,197) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.999662
+[7471:MainThread](2026-05-04 14:18:36,721) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.995011
+[7471:MainThread](2026-05-04 14:18:47,341) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.996877
+[7471:MainThread](2026-05-04 14:18:56,963) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.998441
+[7471:MainThread](2026-05-04 14:19:02,448) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 47.9s
+[7471:MainThread](2026-05-04 14:19:02,460) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:19:08,769) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:19:10,261) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 14:19:10,261) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  54 | Train IC: 0.041543 | Valid IC: 0.001018 | Train Loss: 0.995281 | Valid Loss: 0.998203
+[7471:MainThread](2026-05-04 14:19:10,262) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 55 start ---
+[7471:MainThread](2026-05-04 14:19:10,280) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.999156
+[7471:MainThread](2026-05-04 14:19:20,860) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.958030
+[7471:MainThread](2026-05-04 14:19:32,372) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.993432
+[7471:MainThread](2026-05-04 14:19:43,344) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.992359
+[7471:MainThread](2026-05-04 14:19:53,293) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.984594
+[7471:MainThread](2026-05-04 14:19:56,752) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 46.5s
+[7471:MainThread](2026-05-04 14:19:56,757) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:20:03,069) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:20:04,568) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 14:20:04,569) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  55 | Train IC: 0.039325 | Valid IC: 0.002655 | Train Loss: 0.995120 | Valid Loss: 0.998260
+[7471:MainThread](2026-05-04 14:20:04,569) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 56 start ---
+[7471:MainThread](2026-05-04 14:20:04,588) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.007090
+[7471:MainThread](2026-05-04 14:20:16,322) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.000334
+[7471:MainThread](2026-05-04 14:20:27,887) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.006490
+[7471:MainThread](2026-05-04 14:20:39,304) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.991400
+[7471:MainThread](2026-05-04 14:20:50,315) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=1.009471
+[7471:MainThread](2026-05-04 14:20:56,272) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 51.7s
+[7471:MainThread](2026-05-04 14:20:56,277) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:21:02,617) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:21:04,132) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 14:21:04,133) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  56 | Train IC: 0.042757 | Valid IC: 0.000766 | Train Loss: 0.994875 | Valid Loss: 0.998431
+[7471:MainThread](2026-05-04 14:21:04,133) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 57 start ---
+[7471:MainThread](2026-05-04 14:21:04,150) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.999481
+[7471:MainThread](2026-05-04 14:21:14,947) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.039768
+[7471:MainThread](2026-05-04 14:21:25,344) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.003071
+[7471:MainThread](2026-05-04 14:21:36,303) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.992614
+[7471:MainThread](2026-05-04 14:21:46,234) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.990476
+[7471:MainThread](2026-05-04 14:21:52,084) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 47.9s
+[7471:MainThread](2026-05-04 14:21:52,098) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:21:58,412) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:21:59,917) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.8s
+[7471:MainThread](2026-05-04 14:21:59,918) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  57 | Train IC: 0.044192 | Valid IC: -0.000195 | Train Loss: 0.994791 | Valid Loss: 0.998273
+[7471:MainThread](2026-05-04 14:21:59,918) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 58 start ---
+[7471:MainThread](2026-05-04 14:21:59,938) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.998068
+[7471:MainThread](2026-05-04 14:22:10,866) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.981592
+[7471:MainThread](2026-05-04 14:22:22,229) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.005208
+[7471:MainThread](2026-05-04 14:22:33,007) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.998370
+[7471:MainThread](2026-05-04 14:22:42,888) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.987100
+[7471:MainThread](2026-05-04 14:22:48,302) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 48.4s
+[7471:MainThread](2026-05-04 14:22:48,309) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:22:54,774) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:22:56,325) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 8.0s
+[7471:MainThread](2026-05-04 14:22:56,326) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  58 | Train IC: 0.038657 | Valid IC: 0.005758 | Train Loss: 0.995104 | Valid Loss: 0.998324
+[7471:MainThread](2026-05-04 14:22:56,326) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 59 start ---
+[7471:MainThread](2026-05-04 14:22:56,344) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=1.012086
+[7471:MainThread](2026-05-04 14:23:04,850) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=1.005037
+[7471:MainThread](2026-05-04 14:23:16,236) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=1.002354
+[7471:MainThread](2026-05-04 14:23:27,763) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.976834
+[7471:MainThread](2026-05-04 14:23:38,176) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.997044
+[7471:MainThread](2026-05-04 14:23:43,833) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 47.5s
+[7471:MainThread](2026-05-04 14:23:43,837) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:23:49,986) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:23:51,444) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.6s
+[7471:MainThread](2026-05-04 14:23:51,445) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  59 | Train IC: 0.029310 | Valid IC: 0.002731 | Train Loss: 0.995610 | Valid Loss: 0.998209
+[7471:MainThread](2026-05-04 14:23:51,445) INFO - qlib.HIST_US - [train_hist_us.py:409] - --- Epoch 60 start ---
+[7471:MainThread](2026-05-04 14:23:51,461) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1/2267, loss=0.996736
+[7471:MainThread](2026-05-04 14:24:03,001) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 500/2267, loss=0.981114
+[7471:MainThread](2026-05-04 14:24:14,091) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1000/2267, loss=0.997950
+[7471:MainThread](2026-05-04 14:24:25,198) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 1500/2267, loss=0.999545
+[7471:MainThread](2026-05-04 14:24:35,335) INFO - qlib.HIST_US - [train_hist_us.py:290] -   train batch 2000/2267, loss=0.994033
+[7471:MainThread](2026-05-04 14:24:40,921) INFO - qlib.HIST_US - [train_hist_us.py:412] -   train_epoch done in 49.5s
+[7471:MainThread](2026-05-04 14:24:40,925) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(train) batch 1/2267
+[7471:MainThread](2026-05-04 14:24:47,356) INFO - qlib.HIST_US - [train_hist_us.py:313] -   eval(valid) batch 1/502
+[7471:MainThread](2026-05-04 14:24:48,827) INFO - qlib.HIST_US - [train_hist_us.py:419] -   eval done in 7.9s
+[7471:MainThread](2026-05-04 14:24:48,827) INFO - qlib.HIST_US - [train_hist_us.py:424] - Epoch  60 | Train IC: 0.047352 | Valid IC: -0.001704 | Train Loss: 0.994346 | Valid Loss: 0.998383
+[7471:MainThread](2026-05-04 14:24:48,828) INFO - qlib.HIST_US - [train_hist_us.py:437] - Early stop at epoch 60
+[7471:MainThread](2026-05-04 14:24:48,828) INFO - qlib.HIST_US - [train_hist_us.py:440] - Best: epoch 45, Valid IC = 0.011636
+  Feature count: 300 (expected: 300)
+  Train samples: 938009
+
+[3/5] Loading concept data...
+  stock2concept: (745, 11)
+  stock_index: 745 stocks
+
+[4/5] Training HIST model...
+
+[5/5] Evaluating on test set...
+
+======================================================================
+  HIST US Training Results
+======================================================================
+  Best Epoch:        45
+  Best Valid IC:     0.011636
+  ---
+  Test IC:           0.005302 (std=0.1697)
+  Test ICIR:         0.0312
+  Test Rank IC:      0.003958 (std=0.1707)
+  Test Rank ICIR:    0.0232
+  ---
+  Long-Short Annual: 551.94%
+  Long-Short Sharpe: 0.6074
+  ---
+  Test Days:         399
+  Test Samples:      198333
+======================================================================
+
+  Model:       /root/autodl-tmp/hist_us_train/results/hist_us/hist_us_best.pt
+  Predictions: /root/autodl-tmp/hist_us_train/results/hist_us/predictions.pkl
+  Results:     /root/autodl-tmp/hist_us_train/results/hist_us/eval_results.json
+
+Done!

@@ -1,0 +1,15 @@
+{
+  "IC_mean": 0.005301685217835477,
+  "IC_std": 0.16969086806629133,
+  "ICIR": 0.031243196986493582,
+  "RankIC_mean": 0.003957597819104271,
+  "RankIC_std": 0.170714964227485,
+  "RankICIR": 0.02318248922693982,
+  "num_days": 399.0,
+  "num_samples": 198333.0,
+  "long_short_return_daily": 0.021902242664551107,
+  "long_short_return_annual": 5.519365151466879,
+  "long_short_sharpe": 0.6073845168176651,
+  "best_epoch": 45,
+  "best_valid_ic": 0.011635700996967025
+}

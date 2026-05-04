@@ -1,0 +1,26 @@
+{
+  "IC_mean": 0.10335640819497434,
+  "IC_std": 0.11902322373872873,
+  "ICIR": 0.8683717760912489,
+  "RankIC_mean": 0.015219385478268769,
+  "RankIC_std": 0.11732124114927897,
+  "RankICIR": 0.12972404083906658,
+  "num_days": 901,
+  "num_samples": 443290,
+  "long_short_return_annual": 23.163771361112595,
+  "long_short_sharpe": 3.470446174236586,
+  "model": "lgbm",
+  "mode": "baseline",
+  "instruments": "sp500",
+  "n_features": 158,
+  "n_train_samples": 718306,
+  "train_time_s": 138.1,
+  "time_windows": {
+    "train_start": "2008-01-01",
+    "train_end": "2014-12-31",
+    "valid_start": "2015-01-01",
+    "valid_end": "2016-12-31",
+    "test_start": "2017-01-01",
+    "test_end": "2020-08-01"
+  }
+}
